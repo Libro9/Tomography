@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 points = np.genfromtxt('2d/points_1slice.csv', delimiter=',', skip_header=1) #import the coordinates of the points from a csv file into a numpy array
 
-COORDS = True #Allows you to enter the coordinates of start and end points, if false the argument of the coordinates must be given
+COORDS = True #Allows you to enter the coordinates of start and end points. If false, the argument of the coordinates must be given
 START_COORDS = [6.6, 46.5]
 END_COORDS = [57.3, 55.5]
 

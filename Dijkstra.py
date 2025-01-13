@@ -4,6 +4,7 @@ from timeit import default_timer as timer
 from heapq import heapify, heappop, heappush
 import numpy as np
 import matplotlib.pyplot as plt
+import networkx as nx
 
 start = timer()
 
@@ -86,7 +87,7 @@ class Graph:
 
 G = Graph(graph)
 
-SOURCE = 'D'
+SOURCE = 'G'
 TARGET = 'A'
 
 PATH, distances, predecessors = G.shortest_path(SOURCE, TARGET)
@@ -98,3 +99,22 @@ print('Time elapsed: ', end - start)
 print('The shortest distance from {0} to {1} is {2}'.format(SOURCE, TARGET, DISTANCE), '\n')
 
 print('The path from {0} to {1} is {2}'.format(SOURCE, TARGET, PATH))
+
+# Create an empty nx graph
+Gx = nx.Graph()
+
+# Add edges to the graph based on the dictionary
+for node, neighbors in graph.items():
+    for neighbor, weight in neighbors.items():
+        Gx.add_edge(node, neighbor, weight=weight)
+
+# Draw the graph
+pos = nx.spring_layout(Gx)  # or use other layout like nx.circular_layout(G)
+nx.draw(Gx, pos, with_labels=True, node_color="lightblue", node_size=3000, font_size=12, font_weight="bold", edge_color='gray')
+
+# Draw edge labels (weights)
+edge_labels = nx.get_edge_attributes(Gx, 'weight')
+nx.draw_networkx_edge_labels(Gx, pos, edge_labels=edge_labels)
+
+# Display the plot
+plt.show()
